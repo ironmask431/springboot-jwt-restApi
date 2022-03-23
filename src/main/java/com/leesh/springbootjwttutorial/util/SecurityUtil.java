@@ -13,10 +13,6 @@ public class SecurityUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityUtil.class);
 
-    private SecurityUtil(){
-
-    }
-
     public static Optional<String> getCurrentUsername(){
         final Authentication authentication = SecurityContextHolder
                 .getContext().getAuthentication();
@@ -36,7 +32,4 @@ public class SecurityUtil {
 
         return Optional.ofNullable(username);
     }
-
-
-
 }

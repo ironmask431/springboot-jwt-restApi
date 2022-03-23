@@ -24,7 +24,7 @@ public class UserService {
 
     @Transactional
     public User signup(UserDto userDto){
-        if(userRepository.findOneWithAuthoritiesByUsername(userDto.getUsername()).orElse(null) != null){
+        if(userRepository.findOneWithAuthoritiesByEmail(userDto.getEmail()).orElse(null) != null){
             throw new RuntimeException(("이미 가입되어 있는 유저입니다."));
         }
 
@@ -33,9 +33,8 @@ public class UserService {
                 .build();
 
         User user = User.builder()
-                .username(userDto.getUsername())
+                .email(userDto.getEmail())
                 .password(passwordEncoder.encode(userDto.getPassword()))
-                .nickname(userDto.getNickname())
                 .authorities(Collections.singleton(authority))
                 .activated(true)
                 .build();
@@ -44,13 +43,13 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<User> getUserWithAuthorities(String username){
-        return userRepository.findOneWithAuthoritiesByUsername(username);
+    public Optional<User> getUserWithAuthorities(String email){
+        return userRepository.findOneWithAuthoritiesByEmail(email);
     }
 
     @Transactional(readOnly = true)
     public Optional<User> getMyUserWithAuthorities(){
         return SecurityUtil.getCurrentUsername()
-                .flatMap(userRepository::findOneWithAuthoritiesByUsername);
+                .flatMap(userRepository::findOneWithAuthoritiesByEmail);
     }
 }

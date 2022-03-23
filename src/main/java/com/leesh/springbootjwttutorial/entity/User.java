@@ -22,15 +22,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
     private Long userId;
 
-    @Column(name="username", length = 50, unique = true)
-    private String username;
+    @Column(name="email", length = 50, unique = true)
+    private String email;
 
     @JsonIgnore
     @Column(name="password", length = 100)
     private String password;
-
-    @Column(name="nickname", length = 50)
-    private String nickname;
 
     @JsonIgnore
     @Column(name="activated")
