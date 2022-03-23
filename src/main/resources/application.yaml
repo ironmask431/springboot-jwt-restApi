@@ -23,3 +23,11 @@ spring:
 logging:
   level:
     com.leesh: debug
+
+jwt:
+  header: Authorization
+  #secret : ????? base64? ???
+  secret: c3ByaW5nYm9vdC1qd3QtdHV0b3JpYWwtc3ByaW5nYm9vdC1qd3QtdHV0b3JpYWwtc3ByaW5nYm9vdC1qd3QtdHV0b3JpYWwK
+
+#??????
+  token-validity-in-seconds: 86400
