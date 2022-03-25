@@ -12,18 +12,18 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/product")
 public class ProductController {
     private final ProductService productService;
 
     //상품 조회
-    @GetMapping("/product")
+    @GetMapping("/all")
     public List<ProductDto> findAll(){
         return productService.findAll();
     }
 
     //상품번호로 주문 조회
-    @GetMapping("/product/{prdId}")
+    @GetMapping("/prdId/{prdId}")
     public ProductDto findById(@PathVariable Long prdId){
         return productService.findById(prdId);
     }

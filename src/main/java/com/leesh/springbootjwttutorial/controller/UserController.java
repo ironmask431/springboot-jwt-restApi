@@ -12,25 +12,19 @@ import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UserController {
     private final UserService userService;
 
-    //로그인 - email, password
-    @PostMapping("/signup")
-    public ResponseEntity<User> signup(@Valid @RequestBody UserDto userDto){
-        return ResponseEntity.ok(userService.signup(userDto));
-    }
-
     //나의정보조회
-    @GetMapping("/user")
+    @GetMapping("/myInfo")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<User> getMyUserInfo(){
         return ResponseEntity.ok(userService.getMyUserWithAuthorities().get());
     }
 
     //특정회원정보 조회
-    @GetMapping("/user/{email}")
+    @GetMapping("/email/{email}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<User> getUserInfo(@PathVariable String email){
         return ResponseEntity.ok(userService.getUserWithAuthorities(email).get());

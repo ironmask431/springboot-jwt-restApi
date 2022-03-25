@@ -11,39 +11,39 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/order")
 public class OrderController {
     private final OrderService orderService;
 
     //전체 주문 조회
-    @GetMapping("/order/")
+    @GetMapping("/all")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public List<OrderDto> findAll(){
         return orderService.findAll();
     }
 
     //주문번호로 주문 조회
-    @GetMapping("/order/{ordId}")
+    @GetMapping("/ordId/{ordId}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public OrderDto findById(@PathVariable Long ordId){
         return orderService.findById(ordId);
     }
 
     //userId 로 주문 조회
-    @GetMapping("/order/user/{userId}")
+    @GetMapping("/userId/{userId}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public List<OrderDto> findByUserId(@PathVariable Long userId){
         return orderService.findByUserId(userId);
     }
 
     //현재 인증된 사용자의 주문 조회 (나의 주문조회)
-    @GetMapping("/order/myOrder")
+    @GetMapping("/myOrder")
     public List<OrderDto> findByMyUserId(){
         return orderService.findByMyUserId();
     }
 
     //주문입력
-    @PostMapping("/order/save")
+    @PostMapping("/save")
     public OrderDto save(@Valid @RequestBody OrderDto orderDto){
         return orderService.save(orderDto);
     }

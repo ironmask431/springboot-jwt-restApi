@@ -20,6 +20,11 @@ spring:
     #data.sql을 h2 테이블이 생성된 후 실행되도록 함.
     defer-datasource-initialization: true
 
+  #Swagger2 추가시 구동오류 수정
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
 logging:
   level:
     com.leesh: debug
