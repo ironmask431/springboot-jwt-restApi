@@ -3,20 +3,18 @@ package com.leesh.springbootjwttutorial.controller;
 import com.leesh.springbootjwttutorial.dto.UserDto;
 import com.leesh.springbootjwttutorial.entity.User;
 import com.leesh.springbootjwttutorial.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
 public class UserController {
     private final UserService userService;
-
-    public UserController(UserService userService){
-        this.userService = userService;
-    }
 
     //로그인 - email, password
     @PostMapping("/signup")

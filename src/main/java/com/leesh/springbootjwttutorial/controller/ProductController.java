@@ -1,6 +1,5 @@
 package com.leesh.springbootjwttutorial.controller;
 
-import com.leesh.springbootjwttutorial.dto.OrderDto;
 import com.leesh.springbootjwttutorial.dto.ProductDto;
 import com.leesh.springbootjwttutorial.service.ProductService;
 import lombok.RequiredArgsConstructor;

@@ -4,8 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity //DB테이블과 1:1 매치
-@Table(name="product") //테이블명 지정
+@Entity
+@Table(name="product")
 @Getter
 @Setter
 @Builder

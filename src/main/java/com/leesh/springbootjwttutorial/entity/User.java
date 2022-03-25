@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity //DB테이블과 1:1 매치
-@Table(name="user") //테이블명 지정
+@Entity
+@Table(name="user")
 @Getter
 @Setter
 @Builder

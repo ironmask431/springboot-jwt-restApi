@@ -1,22 +1,16 @@
 package com.leesh.springbootjwttutorial.service;
 
 import com.leesh.springbootjwttutorial.dto.OrderDto;
-import com.leesh.springbootjwttutorial.dto.ProductDto;
 import com.leesh.springbootjwttutorial.dto.UserDto;
 import com.leesh.springbootjwttutorial.entity.Order;
-import com.leesh.springbootjwttutorial.entity.Product;
-import com.leesh.springbootjwttutorial.entity.User;
 import com.leesh.springbootjwttutorial.repository.OrderRepository;
 import com.leesh.springbootjwttutorial.repository.ProductRepository;
-import com.leesh.springbootjwttutorial.repository.UserRepository;
-import com.leesh.springbootjwttutorial.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -35,9 +29,7 @@ public class OrderService {
                 .map(order -> {return new OrderDto(order);}).collect(Collectors.toList());
 
         for(OrderDto orderDto : orderDtoList){
-            ProductDto productDto = productService.findById(orderDto.getPrdId());
-            //조회한 상품정보 orderDto에 입력
-            orderDto.setProductDto(productDto);
+            settingProductDto(orderDto);
         }
 
         return orderDtoList;
@@ -53,11 +45,7 @@ public class OrderService {
         //orderDto 생성
         OrderDto orderDto = new OrderDto(order);
 
-        //orderDto의 prdId로 productDto 조회
-        ProductDto productDto = productService.findById(orderDto.getPrdId());
-
-        //조회한 상품정보 orderDto에 입력
-        orderDto.setProductDto(productDto);
+        settingProductDto(orderDto);
 
         return orderDto;
     }
@@ -70,10 +58,7 @@ public class OrderService {
                 .map(order -> {return new OrderDto(order);}).collect(Collectors.toList());
 
         for(OrderDto orderDto : orderDtoList){
-            //ordDto의 prdId로 상품정보 조회
-            ProductDto productDto = productService.findById(orderDto.getPrdId());
-            //조회한 상품정보 orderDto에 입력
-            orderDto.setProductDto(productDto);
+            settingProductDto(orderDto);
         }
         return orderDtoList;
     }
@@ -84,17 +69,43 @@ public class OrderService {
         //현재 인증된 사용자의 userId 조회
         UserDto userDto = new UserDto(userService.getMyUserWithAuthorities().get());
         Long userId = userDto.getUserId();
-        log.info("userId="+userId);
+        log.info("findByMyUserId - userId="+userId);
 
         List<OrderDto> orderDtoList = orderRepository.findByUserId(userId).stream()
                 .map(order -> {return new OrderDto(order);}).collect(Collectors.toList());
 
         for(OrderDto orderDto : orderDtoList){
-            ProductDto productDto = productService.findById(orderDto.getPrdId());
-            //조회한 상품정보 orderDto에 입력
-            orderDto.setProductDto(productDto);
+            settingProductDto(orderDto);
         }
         return orderDtoList;
     }
 
+    //주문 입력
+    public OrderDto save(OrderDto orderDto){
+        //주문 받은 prdId 검증
+        productService.findById(orderDto.getPrdId());
+
+        //현재 인증된 사용자의 userId 조회
+        UserDto userDto = new UserDto(userService.getMyUserWithAuthorities().get());
+        Long userId = userDto.getUserId();
+        log.info("save - userId="+userId);
+
+        //Order Entity 생성
+        Order order = Order.builder()
+                .userId(userId)
+                .prdId(orderDto.getPrdId())
+                .build();
+
+        order = orderRepository.save(order);
+
+        orderDto = new OrderDto(order);
+        settingProductDto(orderDto);
+
+        return orderDto;
+    }
+
+    //orderDto의 prdId로 상품정보 조회하여 productDto 필드에 입력
+    public void settingProductDto(OrderDto orderDto){
+        orderDto.setProductDto(productService.findById(orderDto.getPrdId()));
+    }
 }
