@@ -31,4 +31,16 @@ public class OrderController {
     public OrderDto findById(@PathVariable Long ordId){
         return orderService.findById(ordId);
     }
+
+    //userId 로 주문 조회 - @RequestBody 형태로 입력도록 수정해야함.
+    @GetMapping("/order/user/{userId}")
+    public List<OrderDto> findByUserId(@PathVariable Long userId){
+        return orderService.findByUserId(userId);
+    }
+
+    //현재 인증된 사용자의 주문 조회
+    @GetMapping("/order/myOrder")
+    public List<OrderDto> findByMyUserId(){
+        return orderService.findByMyUserId();
+    }
 }

@@ -1,6 +1,7 @@
 package com.leesh.springbootjwttutorial.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.leesh.springbootjwttutorial.entity.User;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -13,7 +14,9 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class UserDto {
 
-    @NotNull
+    private Long userId;
+
+    @NotNull //requestBody로 입력받을 때 null 비허용
     @Size(min=3, max=50)
     private String email;
 
@@ -21,4 +24,9 @@ public class UserDto {
     @NotNull
     @Size(min=3, max=100)
     private String password;
+
+    public UserDto(User user){
+        this.userId = user.getUserId();
+        this.email = user.getEmail();
+    }
 }

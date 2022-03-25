@@ -26,9 +26,9 @@ public class ProductService {
 
     //상품번호로 상품 조회
     @Transactional(readOnly = true)
-    public ProductDto findById(Long prd_id){
-        Product product = productRepository.findById(prd_id)
-                .orElseThrow(()-> new IllegalArgumentException("해당 상품번호가 없습니다. prd_id="+prd_id));
+    public ProductDto findById(Long prdId){
+        Product product = productRepository.findById(prdId)
+                .orElseThrow(()-> new IllegalArgumentException("해당 상품번호가 없습니다. prdId="+prdId));
         ProductDto productDto = new ProductDto(product);
         return productDto;
     }
