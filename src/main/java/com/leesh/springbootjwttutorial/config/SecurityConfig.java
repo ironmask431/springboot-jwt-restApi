@@ -34,8 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
        web.ignoring()
                .antMatchers(
-                       "/h2-console/**"
-                       ,"/favicon.ico"
+                       "/h2-console/**", //h2 db
+                       "/favicon.ico",
+                       "/v2/api-docs",              //swagger-ui 관련
+                       "/swagger-resources/**",
+                       "/swagger-ui.html",
+                       "/webjars/**",
+                       "/swagger/**"
                );
     }
 
@@ -63,10 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/hello/**").permitAll() //hello 테스트  > 전체허용
                 .antMatchers("/api/auth/**").permitAll() //로그인  > 전체허용
                 .antMatchers("/api/join/**").permitAll() //회원가입  > 전체허용
-                .antMatchers("/api/order/**").authenticated() //주문
-                .antMatchers("/api/product/**").authenticated() //상품
-                .antMatchers("/api/user/**").authenticated() //유저
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
 
                 .and()
                 .apply(new JwtSecurityConfig(tokenProvider));

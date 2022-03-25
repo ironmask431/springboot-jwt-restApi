@@ -1,23 +1,35 @@
 package com.leesh.springbootjwttutorial.config;
 
 
+import com.google.common.collect.Lists;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
+import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.Arrays;
+import java.util.List;
 
 @EnableSwagger2
 @Configuration
 public class SwaggerConfig {
 
+    // Swagger url = http://localhost:8080/swagger-ui.html
+
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .securityContexts(Arrays.asList(securityContext()))
+                .securitySchemes(Arrays.asList(apiKey()))
                 .select()
                 //swagger 대상 패키지 설정
 //                .apis(RequestHandlerSelectors.any())
@@ -37,5 +49,23 @@ public class SwaggerConfig {
                 .licenseUrl("")
                 .build();
     }
-    // 완료가 되었으면 URL 로 접속 => http://localhost:8080/swagger-ui.html
+
+    private ApiKey apiKey() {
+        //2번째 인자값인 keyname 은 로그인 시 heder에 토큰이 저장되는 keyname 으로 설정해줘야 한다.
+        return new ApiKey("JWT", "Authorization", "header");
+    }
+
+    private springfox.documentation.spi.service.contexts.SecurityContext securityContext() {
+        return springfox.documentation.spi.service.contexts.SecurityContext
+                .builder() .securityReferences(defaultAuth())
+                .forPaths(PathSelectors.any())
+                .build();
+    }
+
+    List<SecurityReference> defaultAuth() {
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        return Lists.newArrayList(new SecurityReference("JWT", authorizationScopes));
+    }
 }
