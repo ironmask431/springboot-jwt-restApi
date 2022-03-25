@@ -29,7 +29,6 @@ public class SecurityUtil {
         }else if(authentication.getPrincipal() instanceof String){
             username = (String)authentication.getPrincipal();
         }
-
         return Optional.ofNullable(username);
     }
 }

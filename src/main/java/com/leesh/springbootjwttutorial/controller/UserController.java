@@ -37,6 +37,4 @@ public class UserController {
     public ResponseEntity<User> getUserInfo(@PathVariable String email){
         return ResponseEntity.ok(userService.getUserWithAuthorities(email).get());
     }
-
-
 }

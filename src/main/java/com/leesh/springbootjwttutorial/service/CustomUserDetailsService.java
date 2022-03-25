@@ -2,6 +2,7 @@ package com.leesh.springbootjwttutorial.service;
 
 import com.leesh.springbootjwttutorial.entity.User;
 import com.leesh.springbootjwttutorial.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,14 +13,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component("userDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
-
-    public CustomUserDetailsService(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
 
     public UserDetails loadUserByUsername(final String email){
         return userRepository.findOneWithAuthoritiesByEmail(email)
