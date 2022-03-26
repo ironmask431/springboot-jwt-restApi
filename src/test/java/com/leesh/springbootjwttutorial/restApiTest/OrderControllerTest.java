@@ -2,8 +2,10 @@ package com.leesh.springbootjwttutorial.restApiTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leesh.springbootjwttutorial.dto.OrderDto;
+import com.leesh.springbootjwttutorial.entity.Authority;
 import com.leesh.springbootjwttutorial.entity.Order;
 import com.leesh.springbootjwttutorial.entity.Product;
+import com.leesh.springbootjwttutorial.entity.User;
 import com.leesh.springbootjwttutorial.jwt.JwtFilter;
 import com.leesh.springbootjwttutorial.jwt.TokenProvider;
 import com.leesh.springbootjwttutorial.repository.OrderRepository;
@@ -23,10 +25,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.Collections;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -56,6 +61,8 @@ public class OrderControllerTest {
     private TokenProvider tokenProvider;
     @Autowired
     private AuthenticationManagerBuilder authenticationManagerBuilder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private MockMvc mvc;
 
@@ -66,14 +73,31 @@ public class OrderControllerTest {
     private Long ordId;
     private Long userId;
 
-    private String email = "admin@gmail.com";
-    private String password = "admin";
+    private String email = "test@gmail.com";
+    private String password = "test";
 
     @Before //테스트 시작전 실행
     public void setUp(){
         mvc = MockMvcBuilders
                 .webAppContextSetup(context)
                 .apply(springSecurity()).build();
+
+        //data.sql로 미리들어간 데이터가 있으므로 테스트 실행전 전체 삭제해줌.
+        userRepository.deleteAll();
+
+        //테스트용 유저정보 입력
+        Authority authority = Authority.builder()
+                .authorityName("ROLE_ADMIN")
+                .build();
+
+        User user = User.builder()
+                .email(email)
+                .password(passwordEncoder.encode(password))
+                .authorities(Collections.singleton(authority))
+                .activated(true)
+                .build();
+
+        userRepository.save(user);
 
         //Security Context에 유저정보 입력
         UsernamePasswordAuthenticationToken authenticationToken =
