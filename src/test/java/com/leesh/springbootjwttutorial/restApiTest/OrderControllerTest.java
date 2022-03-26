@@ -2,7 +2,6 @@ package com.leesh.springbootjwttutorial.restApiTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leesh.springbootjwttutorial.dto.OrderDto;
-import com.leesh.springbootjwttutorial.dto.UserDto;
 import com.leesh.springbootjwttutorial.entity.Order;
 import com.leesh.springbootjwttutorial.entity.Product;
 import com.leesh.springbootjwttutorial.jwt.JwtFilter;
@@ -24,7 +23,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
