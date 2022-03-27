@@ -1,6 +1,5 @@
 package com.leesh.springbootjwttutorial.controller;
 
-import com.leesh.springbootjwttutorial.dto.UserDto;
 import com.leesh.springbootjwttutorial.entity.User;
 import com.leesh.springbootjwttutorial.service.UserService;
 import lombok.RequiredArgsConstructor;
