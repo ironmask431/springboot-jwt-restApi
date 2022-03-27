@@ -2,6 +2,9 @@ spring:
   h2:
     console:
       enabled: true
+      #로컬이외 환경에서 구동 시 h2-console 접속허용
+      settings:
+        web-allow-others: true
 
   datasources:
     url: jdbc:h2:mem:testdb
