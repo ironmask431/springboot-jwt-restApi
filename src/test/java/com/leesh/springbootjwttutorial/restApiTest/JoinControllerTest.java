@@ -63,6 +63,7 @@ public class JoinControllerTest {
         log.info("userDto.getEmail()="+userDto.getEmail());
         log.info("userDto.getPassword()="+userDto.getPassword());
 
+        //정상응답, 가입한 email과 "USER" 권한이 리턴되는지 확인
         mvc.perform(post(url)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(userDto)))

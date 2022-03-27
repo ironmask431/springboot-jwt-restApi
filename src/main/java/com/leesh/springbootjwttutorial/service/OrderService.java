@@ -104,7 +104,7 @@ public class OrderService {
         return orderDto;
     }
 
-    //orderDto의 prdId로 상품정보 조회하여 productDto 필드에 입력
+    //orderDto의 prdId로 상품정보 조회하여 orderDto 의 productDto 필드에 입력
     public void settingProductDto(OrderDto orderDto){
         orderDto.setProductDto(productService.findById(orderDto.getPrdId()));
     }

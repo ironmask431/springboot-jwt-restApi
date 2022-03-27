@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class LoginDto {
 
+    //@NotNull = requestBody로 입력받을때 not null 체크
     @NotNull
     @Size(min=3, max=50)
     private String email;

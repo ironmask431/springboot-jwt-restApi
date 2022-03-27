@@ -81,7 +81,7 @@ public class UserControllerTest {
 
         userRepository.save(user);
 
-        //Security Context에 유저정보 입력
+        //Security Context에 유저정보 등록, 토큰발급
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(email, password);
 

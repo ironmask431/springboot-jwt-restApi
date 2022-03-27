@@ -12,6 +12,7 @@ import java.util.Optional;
 @Component
 public class SecurityUtil {
 
+    //현재 security context에 인증된 사용자 username 조회
     public static Optional<String> getCurrentUsername(){
         final Authentication authentication = SecurityContextHolder
                 .getContext().getAuthentication();

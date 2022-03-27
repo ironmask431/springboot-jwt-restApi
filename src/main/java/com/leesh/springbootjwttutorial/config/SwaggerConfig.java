@@ -18,6 +18,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Swagger 설정파일
+ */
 @EnableSwagger2
 @Configuration
 public class SwaggerConfig {
@@ -50,7 +53,7 @@ public class SwaggerConfig {
     }
 
     private ApiKey apiKey() {
-        //2번째 인자값인 keyname 은 로그인 시 heder에 토큰이 저장되는 keyname 으로 설정해줘야 한다.
+        //2번째 인자값인 keyname 은 로그인 시 header에 토큰이 저장되는 keyname 으로 설정해줘야 한다.
         return new ApiKey("JWT", "Authorization", "header");
     }
 

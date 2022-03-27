@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * 주문 API 컨트롤러
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/order")

@@ -34,4 +34,4 @@ jwt:
   #secret : 별도로 준비한 키를 base64로 암호화한값
   secret: c3ByaW5nYm9vdC1qd3QtdHV0b3JpYWwtc3ByaW5nYm9vdC1qd3QtdHV0b3JpYWwtc3ByaW5nYm9vdC1qd3QtdHV0b3JpYWwK
   #토큰만료시간
-  token-validity-in-seconds: 86400
+  token-validity-in-seconds: 3600

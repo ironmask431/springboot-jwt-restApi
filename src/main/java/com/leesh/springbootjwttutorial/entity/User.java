@@ -6,6 +6,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * 유저 entity
+ */
 @Entity
 @Table(name="user")
 @Getter

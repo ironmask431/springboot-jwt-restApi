@@ -83,7 +83,7 @@ public class AuthControllerTest {
 
         userRepository.save(user);
 
-        //Security Context에 유저정보 입력
+        //Security Context에 유저정보 등록, 토큰발급
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(email, password);
 
@@ -113,6 +113,7 @@ public class AuthControllerTest {
         log.info("userDto.getEmail()="+userDto.getEmail());
         log.info("userDto.getPassword()="+userDto.getPassword());
 
+        //정상응답, 토큰값이 리턴되었는지 확인
         mvc.perform(post(url)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(userDto)))

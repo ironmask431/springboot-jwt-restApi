@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
+/**
+ * 상품 entity
+ */
 @Entity
 @Table(name="product")
 @Getter

@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * 상품API 컨트롤러
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/product")
 public class ProductController {
     private final ProductService productService;
 
-    //상품 조회
+    //전체 상품 조회
     @GetMapping("/all")
     public List<ProductDto> findAll(){
         return productService.findAll();

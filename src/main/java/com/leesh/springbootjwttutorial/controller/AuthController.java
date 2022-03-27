@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+/**
+ * 로그인 API 컨트롤러
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/auth")
@@ -27,7 +30,7 @@ public class AuthController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    //로그인, JWT토큰 리턴
+    //로그인api, 성공 시 JWT토큰 리턴
     @PostMapping("/login")
     public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto){
 
@@ -37,8 +40,10 @@ public class AuthController {
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        //jwt토큰생성
         String jwt = tokenProvider.createToken(authentication);
 
+        //header에 jwt토큰 추가
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER,"Bearer "+ jwt);
 

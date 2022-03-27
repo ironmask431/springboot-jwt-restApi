@@ -29,12 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    //h2-console, favicon은 시큐리티에 걸리지않도록 설정
+    //h2-console, favicon, swagger-ui  시큐리티에 필터에 걸리지않도록 설정
     @Override
     public void configure(WebSecurity web) throws Exception {
        web.ignoring()
                .antMatchers(
-                       "/h2-console/**", //h2 db
+                       "/h2-console/**", //h2 console
                        "/favicon.ico",
                        "/v2/api-docs",              //swagger-ui 관련
                        "/swagger-resources/**",

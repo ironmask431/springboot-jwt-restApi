@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
+/**
+ * 주문 entity
+ */
 @Entity
 @Table(name="order_table")
 @Getter

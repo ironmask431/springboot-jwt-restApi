@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 권한 entity
+ */
 @Entity
 @Table(name="authority")
 @Getter

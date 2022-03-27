@@ -72,7 +72,6 @@ public class OrderControllerTest {
     private int price = 3000;
     private Long ordId;
     private Long userId;
-
     private String email = "test@gmail.com";
     private String password = "test";
 
@@ -84,6 +83,8 @@ public class OrderControllerTest {
 
         //data.sql로 미리들어간 데이터가 있으므로 테스트 실행전 전체 삭제해줌.
         userRepository.deleteAll();
+        productRepository.deleteAll();
+        orderRepository.deleteAll();
 
         //테스트용 유저정보 입력
         Authority authority = Authority.builder()
@@ -99,7 +100,7 @@ public class OrderControllerTest {
 
         userRepository.save(user);
 
-        //Security Context에 유저정보 입력
+        //Security Context에 유저정보 등록, 토큰발급
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(email, password);
 
@@ -114,10 +115,6 @@ public class OrderControllerTest {
         //Security Context 에 입력된 유저의 userId 조회
         userId = SecurityUtil.getCurrentUsername()
                 .flatMap(email -> userRepository.findOneWithAuthoritiesByEmail(email)).get().getUserId();
-
-        //data.sql로 미리들어간 데이터가 있으므로 테스트 실행전 전체 삭제해줌.
-        productRepository.deleteAll();
-        orderRepository.deleteAll();
 
         //테스트용 상품data 입력
         productRepository.save(Product.builder().prdNm(prdNm).price(price).build());

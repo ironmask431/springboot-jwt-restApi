@@ -18,6 +18,7 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends GenericFilterBean {
 
+    //토큰 헤더에 입력시 설정한 key값
     public static final String AUTHORIZATION_HEADER = "Authorization";
 
     private TokenProvider tokenProvider;
@@ -41,12 +42,12 @@ public class JwtFilter extends GenericFilterBean {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             log.debug("Security Context에 '{}' 인증정보를 저장했습니다. uri:{}",authentication.getName(), requestURI);
         }else{
-            log.debug("유효한 JWT 토큰이 없습니다.",requestURI);
+            //log.debug("유효한 JWT 토큰이 없습니다.",requestURI);
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
-    //request Header 에서 토큰정보를 꺼내오는 역할
+    //request Header 에서 토큰정보를 읽어옴.
     private String resolveToken(HttpServletRequest request){
        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
        if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")){

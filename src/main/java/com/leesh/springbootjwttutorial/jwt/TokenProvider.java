@@ -35,12 +35,12 @@ public class TokenProvider implements InitializingBean {
             @Value("${jwt.token-validity-in-seconds}") long tokenValidityInMilliseconds
     ){
         this.secret = secret;
-        this.tokenValidityInMilliseconds = tokenValidityInMilliseconds * 1000;
+        this.tokenValidityInMilliseconds = tokenValidityInMilliseconds * 1000; //3600 * 1000 ms = 1시간
     }
 
     @Override
     public void afterPropertiesSet(){
-        //TokenProvider bean 생성 후 생성자로 주입받은 secret 값을 base64 decode해서 key변수에 할당
+        //TokenProvider bean 생성 후 생성자로 주입받은 secret 값을 이용해 암호화 키 생성
         byte[] keyBytes = Decoders.BASE64.decode(secret);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
@@ -51,6 +51,7 @@ public class TokenProvider implements InitializingBean {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
+        //토큰 유효시간 설정
         long now = (new Date()).getTime();
         Date validity = new Date(now + this.tokenValidityInMilliseconds);
 
@@ -80,6 +81,7 @@ public class TokenProvider implements InitializingBean {
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
+    //토큰의 유효성 검사
     public boolean validateToken(String token){
         try{
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);

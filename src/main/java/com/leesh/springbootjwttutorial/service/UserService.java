@@ -21,19 +21,21 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    //회원가입
     @Transactional
     public User signup(UserDto userDto){
         if(userRepository.findOneWithAuthoritiesByEmail(userDto.getEmail()).orElse(null) != null){
             throw new RuntimeException(("이미 가입되어 있는 유저입니다."));
         }
 
+        //권한entity, 유저entity 생성
         Authority authority = Authority.builder()
                 .authorityName("ROLE_USER")
                 .build();
 
         User user = User.builder()
                 .email(userDto.getEmail())
-                .password(passwordEncoder.encode(userDto.getPassword()))
+                .password(passwordEncoder.encode(userDto.getPassword())) //패스워드 암호화
                 .authorities(Collections.singleton(authority))
                 .activated(true)
                 .build();
@@ -41,11 +43,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    //email로 회원정보 조회
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthorities(String email){
         return userRepository.findOneWithAuthoritiesByEmail(email);
     }
 
+    //현재 인증된 사용자의 회원정보 조회
     @Transactional(readOnly = true)
     public Optional<User> getMyUserWithAuthorities(){
         log.info(SecurityUtil.getCurrentUsername().toString());
