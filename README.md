@@ -1,7 +1,7 @@
 # springboot-jwt-restApi
 
 목적 : 
-1. springSecurity + JWT 토큰인증 구축해보기
+1. SpringSecurity + JWT 토큰인증 구축해보기
 2. JWT 토큰인증방식 REST API 에 적용해보기 
 3. JPA 활용 공부
 4. JUNIT 테스트 코드 작성 공부
