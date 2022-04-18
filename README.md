@@ -6,7 +6,7 @@
 3. JPA 활용 공부
 4. JUNIT 테스트 코드 작성 공부
 5. Swagger로 API문서 만들어보기
-6. Docker로 도커 이미지파일 생성, local구동해보기
+6. Docker local설치 후  도커 이미지파일 생성, local 에서 구동해보기
 
 기능 :
 1. JWT 토큰인증을 이용한 회원가입, 로그인(토큰발급), 
