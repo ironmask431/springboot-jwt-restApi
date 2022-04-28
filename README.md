@@ -1,6 +1,6 @@
 # springboot-jwt-restApi
 
-목적 : 
+### 목적 : 
 1. SpringSecurity + JWT 토큰인증 구축
 2. JWT 토큰인증방식 REST API 에 적용
 3. JPA 활용 공부
@@ -8,11 +8,11 @@
 5. Swagger로 API문서 작성
 6. Docker local설치 후  도커 이미지파일 생성, local 에서 구동해보기
 
-기능 :
+### 기능 :
 1. JWT 토큰인증을 이용한 회원가입, 로그인(토큰발급), 
 상품조회, 유저조회, 주문하기 REST API 제공
 
-개발환경 
+### 개발환경 
 * 언어  : java 11
 * 프레임워크  : springboot 2.6.4
 * 빌드도구  : gradle 7.4.1
@@ -23,7 +23,7 @@
 * 테스트 : Junit 4.13.1
 * api문서 : Swagger 2.9.2
 
-JWT 토큰인증 API 테스트
+### JWT 토큰인증 API 테스트
 
 * API문서 Swagger 적용
 
