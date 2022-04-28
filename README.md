@@ -1,11 +1,11 @@
 # springboot-jwt-restApi
 
 목적 : 
-1. SpringSecurity + JWT 토큰인증 구축해보기
-2. JWT 토큰인증방식 REST API 에 적용해보기 
+1. SpringSecurity + JWT 토큰인증 구축
+2. JWT 토큰인증방식 REST API 에 적용
 3. JPA 활용 공부
-4. JUNIT 테스트 코드 작성 공부
-5. Swagger로 API문서 만들어보기
+4. JUNIT 테스트 코드 공부
+5. Swagger로 API문서 작성
 6. Docker local설치 후  도커 이미지파일 생성, local 에서 구동해보기
 
 기능 :
