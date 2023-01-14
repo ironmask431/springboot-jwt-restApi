@@ -58,3 +58,50 @@
 ![토큰변경시](https://user-images.githubusercontent.com/48856906/160974687-e3defb27-d6e8-4cb3-85ed-696e6aadd27a.PNG)
 
 
+### 전체 API 실행결과 
+1.로그인(토큰발급)
+```POST - /api/auth/login```
+
+
+2.회원가입  
+POST  - /api/join/signup
+
+
+3.email로 회원정보조회 - (ADMIN 유저만 가능)
+GET  - /api/user/email/{email}
+
+
+4.나의 회원정보조회 
+GET  - /api/user/myInfo
+
+
+5.전체상품목록 조회
+GET  - /api/product/all
+
+
+6.상품ID로 상품조회 
+GET  - /api/product/prdId/{prdId}
+
+
+7.전체주문조회 - (ADMIN 유저만 가능)
+GET  - /api/order/all
+
+
+8.주문ID로 주문조회 - (ADMIN 유저만 가능)
+GET  - /api/order/ordId/{ordId}
+
+
+8.회원ID로 주문조회 - (ADMIN 유저만 가능)
+GET  - /api/order/userId/{userId}
+
+
+10.나의 주문조회 
+GET  - /api/order/myOrder
+
+
+11.주문입력
+POST  - /api/order/save
+
+
+
+
