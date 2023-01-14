@@ -61,47 +61,54 @@
 ### 전체 API 실행결과 
 1.로그인(토큰발급)
 ```POST - /api/auth/login```
+![로그인(토큰발급)](https://user-images.githubusercontent.com/48856906/212468852-a7d7e8ed-b48a-43bd-b12f-b4631dc4b91c.png)
 
 
 2.회원가입  
-POST  - /api/join/signup
+```POST  - /api/join/signup```
+![회원가입](https://user-images.githubusercontent.com/48856906/212468858-f43e4f52-f902-4080-9e90-a78202ddef35.png)
 
 
 3.email로 회원정보조회 - (ADMIN 유저만 가능)
-GET  - /api/user/email/{email}
+```GET  - /api/user/email/{email}```
 
 
 4.나의 회원정보조회 
-GET  - /api/user/myInfo
+```GET  - /api/user/myInfo```
+![email회원정보조회](https://user-images.githubusercontent.com/48856906/212468867-d6868029-f0b5-4e62-993b-266eed0a6b5e.png)
 
 
 5.전체상품목록 조회
-GET  - /api/product/all
+```GET  - /api/product/all```
+![전체상품목록조회](https://user-images.githubusercontent.com/48856906/212468883-6997b717-b50f-40bf-941d-09b48977aca6.png)
 
 
 6.상품ID로 상품조회 
-GET  - /api/product/prdId/{prdId}
-
+```GET  - /api/product/prdId/{prdId}```
+![상품id로 상품조회](https://user-images.githubusercontent.com/48856906/212468887-a59b7009-7228-4679-aee6-7e9c7af248b5.png)
 
 7.전체주문조회 - (ADMIN 유저만 가능)
-GET  - /api/order/all
+```GET  - /api/order/all```
+![전체주문조회(admin)](https://user-images.githubusercontent.com/48856906/212468894-8b6579c0-dab4-4898-9bcb-c0ed95569ffe.png)
 
 
 8.주문ID로 주문조회 - (ADMIN 유저만 가능)
-GET  - /api/order/ordId/{ordId}
+```GET  - /api/order/ordId/{ordId}```
+![주문ID로 주문조회](https://user-images.githubusercontent.com/48856906/212468896-68cba4bb-111b-490b-847d-c2f58a0320ad.png)
 
 
 8.회원ID로 주문조회 - (ADMIN 유저만 가능)
-GET  - /api/order/userId/{userId}
-
+```GET  - /api/order/userId/{userId}```
+![회원id로 주문조회](https://user-images.githubusercontent.com/48856906/212468898-507ee101-3306-4430-b30a-8f4eafad263e.png)
 
 10.나의 주문조회 
-GET  - /api/order/myOrder
+```GET  - /api/order/myOrder```
+![나의주문조회](https://user-images.githubusercontent.com/48856906/212468903-6783d8dd-9081-4c09-b876-157ae3cc5a83.png)
 
 
 11.주문입력
-POST  - /api/order/save
-
+```POST  - /api/order/save```
+![주문입력](https://user-images.githubusercontent.com/48856906/212468907-f22929cb-8116-4591-b026-f863e9b200ab.png)
 
 
 
